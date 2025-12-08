@@ -2,10 +2,11 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 
-# path = "/dev/v4l/by-id/usb-046d_HD_Webcam_C525_C0C86EA0-video-index0"
+# other path for my webcam: path = "/dev/v4l/by-id/usb-046d_HD_Webcam_C525_C0C86EA0-video-index0"
 path = 0
 capture = cv.VideoCapture(path)
 
+# spooky mystery variable that I forgot what it does
 i = 0
 
 # thresholds for binary thresholding
@@ -26,24 +27,21 @@ s2 = 1000
 # display scaling factor
 scaling_factor = 0.8
 
-with open("output.txt", "w") as output:
-    output.write("")
-
 while True:
 
     ret, Frame = capture.read()
 
     if ret == True:
 
+        # displays original input
+        resize_original = cv.resize(Frame, None, fx=scaling_factor, fy=scaling_factor, interpolation=cv.INTER_LINEAR)
+        cv.imshow('Original', resize_original)
+
         # dots is the contour of the dots
         dots = []
 
         # sets display to frame for later purposes
         Display = Frame
-
-        # displays original input
-        resize_original = cv.resize(Frame, None, fx=scaling_factor, fy=scaling_factor, interpolation=cv.INTER_LINEAR)
-        cv.imshow('Original', resize_original)
 
         # makes a grayscale feed
         gray = cv.cvtColor(Frame, cv.COLOR_BGR2GRAY)
@@ -74,6 +72,7 @@ while True:
         # appends the current sum of dots onto dot_sum
         with open("output.txt", "a") as output:
             output.write(str(i) + " "  + str(len(dots)) + "\n")
+            # mystery variable strikes again (it adds the index for each entry in output)
             i = i + 1
 
         # draws green lines on contours, blue borders on dots
@@ -96,4 +95,5 @@ while True:
 
     else:
         break
+
 cv.destroyAllWindows()
