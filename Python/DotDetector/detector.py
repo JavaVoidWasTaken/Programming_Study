@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # other path for my webcam: path = "/dev/v4l/by-id/usb-046d_HD_Webcam_C525_C0C86EA0-video-index0"
-path = 0
+path = "/home/java/Videos/Competition Videos/Dot Detector Data/Tagged, Red.mp4"
 capture = cv.VideoCapture(path)
 
 # spooky mystery variable that I forgot what it does
@@ -11,11 +11,11 @@ i = 0
 
 # thresholds for binary thresholding
 max_thresh = 255
-thresh = 170
+thresh = 75
 
 # dilation and erosion strength
-erosion_strength = 3
-dilation_strength = 3
+erosion_strength = 8
+dilation_strength = 8
 
 # iterations of dilating and erosion to reduce noise
 iterations = 10
@@ -25,7 +25,7 @@ s1 = 100
 s2 = 1000
 
 # display scaling factor
-scaling_factor = 0.8
+scaling_factor = 1
 
 while True:
 
