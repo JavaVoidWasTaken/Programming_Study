@@ -1,1 +1,1 @@
-g++ -o ./result.exe ./raw.cpp
+g++ -o ./result.exe ./main.cpp

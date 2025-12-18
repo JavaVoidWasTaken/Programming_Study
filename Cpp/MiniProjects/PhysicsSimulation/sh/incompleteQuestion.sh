@@ -1,4 +1,4 @@
 echo Please type in your desired file name:
 read fileName
 
-cp ./raw.cpp ./InCompleteQuestions/$fileName
+cp ./main.cpp ./IncompleteQuestions/$fileName
