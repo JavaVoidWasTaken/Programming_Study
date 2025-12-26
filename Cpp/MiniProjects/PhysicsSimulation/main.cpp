@@ -13,6 +13,7 @@ double canvasSize = 40;
 double gravity = -0.4;
 double initialSpeed = 5;
 double mass = 1000;
+string output = "";
 
 
 double getFinalPosition(double time){
@@ -40,49 +41,56 @@ double truncateLastDigits(double input, int decimals){
 	return floor(input*powerOfTen)/powerOfTen;
 }
 
-void outputData(double until){
-	cout << "Current mass              : " << mass << '\n';
-	cout << "Current gravity           : " << gravity << '\n';
-	cout << "Current Height            : " << truncateLastDigits(getFinalPosition(until), 3) + 0.001 << '\n';
-	cout << "Current Speed             : " << truncateLastDigits(getCurrentSpeed(until), 3) + 0.001 << '\n';
-	cout << "Current Potential Energy  : " << round(getPotentialEnergy(until))<< '\n';
-	cout << "Current Kinetic Energy    : " << round(getKineticEnergy(until))<< '\n';
-	cout << "Current Mechanical Energy : " << getPotentialEnergy(until) + getKineticEnergy(until) << '\n';
+void appendOutput(string beginning, double value, string end){
+	output.append(beginning);
+	output.append(to_string(value));
+	output.append(end);
 }
 
-void drawChart(double until){
+void appendDataSummary(double until){
+	appendOutput("Current mass              : ", mass, "\n");
+	appendOutput("Current gravity           : ", gravity, "\n");
+	appendOutput("Current Height            : ", truncateLastDigits(getFinalPosition(until), 3) + 0.001, "\n");
+	appendOutput("Current Speed             : ", truncateLastDigits(getCurrentSpeed(until), 3) + 0.001, "\n");
+	appendOutput("Current Potential Energy  : ", round(getPotentialEnergy(until)), "\n");
+	appendOutput("Current Kinetic Energy    : ", round(getKineticEnergy(until)), "\n");
+	appendOutput("Current Mechanical Energy : ", getPotentialEnergy(until) + getKineticEnergy(until), "\n");
+}
+
+void printAndEmptyOutput(){
+	cout << output;
+	output = "";
+}
+
+void appendChart(double until){
 	for (int y = canvasSize; y >= 0; --y){
 		for (int x = 0; x < canvasSize*2; ++x){
 			if (round(getFinalPosition(x)) == y && x <= until){
-				cout << 'O';
+				output.append("O");
 			} else {
-				cout << '-';
+				output.append("-");
 			}
 		}
-		cout << '\n';
+		output.append("\n");
 	}
 }
 
-int drawPlot(double until){
-	outputData(until);
-	drawChart(until);
-
-	if (getFinalPosition(until) < 0){
-		return 0;
-	} else {
-		return 1;
-	}
+void drawPlot(double until){
+	appendDataSummary(until);
+	appendChart(until);
+	printAndEmptyOutput();
 }
+
 
 int main(){
 	int x = 1;
 
 	for (float i = 0; i < canvasSize*2; i += 0.1){
 		cout << "\n" << endl;
-		x = drawPlot(i);
-		if (x == 0){
+		drawPlot(i);
+		if (getFinalPosition(i) < 0){
 			break;
-		}	
-		this_thread::sleep_for(chrono::milliseconds(30));
+		}
+		this_thread::sleep_for(chrono::milliseconds(5));
 	}
 }
