@@ -1,0 +1,1 @@
+./result.exe < ./input.txt
