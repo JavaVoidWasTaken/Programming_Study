@@ -16,10 +16,10 @@ private:
 	void outputPlayerInputMessage(){
 		switch (currentPlayer){
 			case 1:
-				cout << "Player A, input the amount of matches:\n> ";
+				cout << "Player A, input the amount of matches: ";
 				break;
 			case 2:
-				cout << "Player B, input the amount of matches:\n> ";
+				cout << "Player B, input the amount of matches: ;
 				break;
 		}
 	}
@@ -43,7 +43,7 @@ private:
 		if (winCondition == 2){
 			cout << "Player A can't pick anymore matches, so player B wins\n";
 		} else if (winCondition == 1) {
-			cout << "Player B can't pick anymore matches, so player A wins\b";
+			cout << "Player B can't pick anymore matches, so player A wins\n";
 		}
 	}
 
