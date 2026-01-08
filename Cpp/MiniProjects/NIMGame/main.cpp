@@ -19,7 +19,7 @@ private:
 				cout << "Player A, input the amount of matches: ";
 				break;
 			case 2:
-				cout << "Player B, input the amount of matches: ;
+				cout << "Player B, input the amount of matches: ";
 				break;
 		}
 	}
