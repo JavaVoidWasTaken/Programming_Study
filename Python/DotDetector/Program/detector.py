@@ -3,30 +3,30 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # other path for my webcam: path = "/dev/v4l/by-id/usb-046d_HD_Webcam_C525_C0C86EA0-video-index0"
-path = "/home/java/Videos/Competition Videos/Dot Detector Data/New/Raw Data 1.mp4"
+path = "/home/java/Videos/Competition Videos/Dot Detector Data/New/Clip 3.mp4"
 capture = cv.VideoCapture(path)
 
-# thresholds for binary thresholding
+# threshold1s for binary thresholding
 max_thresh = 255
-thresh = 50
+thresh = 75
 
 # dilation and erosion strength
-erosion_strength = 10
-dilation_strength = 10
+erosion_strength = 5
+dilation_strength = 5
 
 # iterations of dilating and erosion to reduce noise
-iterations = 4
+iterations = 3
 
 # lower and upper bounds for dot detection
-s1 = 200
-s2 = 1000
+s1 = 40
+s2 = 300
 
 # display scaling factor
-scaling_factor = 1
+scaling_factor = 0.5
 
 
 # index of the frame of output
-i = 0
+currentFrame = 0
 
 
 # clears the output
@@ -41,7 +41,7 @@ while True:
 
         # displays original input
         resize_original = cv.resize(Frame, None, fx=scaling_factor, fy=scaling_factor, interpolation=cv.INTER_LINEAR)
-        cv.imshow('Source', resize_original)
+        # cv.imshow('Source', resize_original)
 
         # dots is the contour of the dots
         dots = []
@@ -77,9 +77,9 @@ while True:
 
         # appends the current sum of dots onto dot_sum
         with open("output.txt", "a") as output:
-            output.write(str(i) + " "  + str(len(dots)) + "\n")
-            # mystery variable strikes again (it adds the index for each entry in output)
-            i = i + 1
+            currentFrame = currentFrame + 1
+            # output.write(str(currentFrame) + " "  + str(len(dots)) + "\n")
+            output.write(str(len(dots)) + "\n")
 
         # draws green lines on contours, blue borders on dots
         cv.drawContours(Display, cnts, -1, (0, 255, 0), 3)
@@ -92,11 +92,11 @@ while True:
 
         # shows the frame
         cv.imshow('Result', resize_display)
-        cv.imshow('Grayscale', resize_gray)
-        cv.imshow('Binary', resize_threshed)
+        #cv.imshow('Grayscale', resize_gray)
+        #cv.imshow('Binary', resize_threshed)
 
         # ends program when q is pressed
-        if cv.waitKey(30) & 0xFF == ord('q'):
+        if cv.waitKey(1) & 0xFF == ord('q'):
             break
 
     else:
