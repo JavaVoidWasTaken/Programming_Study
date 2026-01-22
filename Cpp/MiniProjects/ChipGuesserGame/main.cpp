@@ -8,7 +8,7 @@ using namespace std;
 class chipGame{
 private:
 	int goodChipsAmount = 9;
-    	int badChipsAmount = 7;
+    int badChipsAmount = 7;
 	enum chipCondition {
 		good = 1,
 		bad = 2,
@@ -270,18 +270,19 @@ private:
 			winStatus = win;
 		}
 	}
+
 public:
 	chipGame(){
 		// Randomizes the list of chips with good or bad chips. 	
 		for (int i = 0; i < 16; ++i){
 			if (rand() % (goodChipsAmount+badChipsAmount) <= goodChipsAmount){
 				--goodChipsAmount;
-                		chips[i] = good;
-                	} else {
+                chips[i] = good;
+            } else {
 				--badChipsAmount;
 				chips[i] = bad;
-                	}
-                }
+            }
+        }
 		
 		// Fills guessedChips with unknown.
 		for (int i = 0; i < 16; ++i){
