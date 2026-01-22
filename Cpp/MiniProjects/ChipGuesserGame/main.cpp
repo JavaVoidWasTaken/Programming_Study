@@ -61,6 +61,7 @@ private:
 	}
 
 	// DEBUG: Prints all actual chips.
+	/*
 	void printActualChips(){
 		for (int i = 0; i < 16; ++i){
 			switch (chips[i]){
@@ -77,6 +78,7 @@ private:
 		}
 		cout << '\n';
 	}
+	*/
 
 	void printMainOptions(){
 		cout << "What do you want to do? (Use option numbers)\n";
@@ -137,7 +139,6 @@ private:
 		cout << endl;
 		printCoordinates();
 		printGuessedChips();
-		printActualChips();
 		printMainOptions();
 	}
 
@@ -220,8 +221,12 @@ private:
 		while (true) {
 			userInput = getUserInput();
 			if (isInputValidForCoordinate(userInput)) {
-				coordinate = convertCoordinateToIndex(userInput[0]); 
-				break;
+				if (guessedChips[convertCoordinateToIndex(userInput[0])] == unknown){
+					coordinate = convertCoordinateToIndex(userInput[0]); 
+					break;
+				} else {
+					cout << "You can't guess the same chip twice!\n> ";
+				}
 			} else {
 				cout << "Invalid coordinates!\n> ";
 			}
@@ -282,7 +287,7 @@ public:
 		for (int i = 0; i < 16; ++i){
 			guessedChips[i] = unknown;
 		}
-        }
+	}
 
 	// False indicates game continuation, true means game end.
 	bool isWinConditionReached(){
@@ -321,6 +326,11 @@ public:
 			processGuessChip();
 			// Possibility of the user failing to guess the chipset, causing a loss.
 			if (isWinConditionReached()){
+				if (winStatus == win){
+					printWinMessage();
+				} else if (winStatus == lose){
+					printLoseMessage();
+				}
 				return false;
 			}
 		}
