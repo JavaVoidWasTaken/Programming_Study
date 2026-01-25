@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # other path for my webcam: path = "/dev/v4l/by-id/usb-046d_HD_Webcam_C525_C0C86EA0-video-index0"
-path = "/home/java/Videos/Competition Videos/Dot Detector Data/New/Clip 3.mp4"
+path = "/home/java/Videos/Competition Videos/Dot Detector Data/New/Clip 6.mp4"
 capture = cv.VideoCapture(path)
 
 # threshold1s for binary thresholding
@@ -18,11 +18,11 @@ dilation_strength = 5
 iterations = 3
 
 # lower and upper bounds for dot detection
-s1 = 40
-s2 = 300
+s1 = 300
+s2 = 3000
 
 # display scaling factor
-scaling_factor = 0.5
+scaling_factor = 1
 
 
 # index of the frame of output
@@ -41,7 +41,7 @@ while True:
 
         # displays original input
         resize_original = cv.resize(Frame, None, fx=scaling_factor, fy=scaling_factor, interpolation=cv.INTER_LINEAR)
-        # cv.imshow('Source', resize_original)
+        cv.imshow('Source', resize_original)
 
         # dots is the contour of the dots
         dots = []
@@ -92,11 +92,11 @@ while True:
 
         # shows the frame
         cv.imshow('Result', resize_display)
-        #cv.imshow('Grayscale', resize_gray)
-        #cv.imshow('Binary', resize_threshed)
+        cv.imshow('Grayscale', resize_gray)
+        cv.imshow('Binary', resize_threshed)
 
         # ends program when q is pressed
-        if cv.waitKey(1) & 0xFF == ord('q'):
+        if cv.waitKey(20) & 0xFF == ord('q'):
             break
 
     else:
