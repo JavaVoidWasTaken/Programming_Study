@@ -13,9 +13,14 @@ const int iterations = 5;
 
 
 void print2DVector(vector<vector<int>> input){
-	for (int i = 0; i < input.size(); ++i){
-		for (int j = 0; j < input.size(); ++j){
-			cout << input[i][j];
+	for (int x = 0; x < input.size(); ++x){
+		for (int y = 0; y < input.size(); ++y){
+			if (input[x][y] == 1){
+				cout << "\u25A0";
+			} else {
+				cout << "\u25A1";
+			}
+			cout << ' ';
 		}
 		cout << '\n';
 	}
