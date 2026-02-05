@@ -2,6 +2,7 @@
 #include <vector>
 using namespace std;
 
+
 // Change this seed if you want different simulations.
 const int seed = 12345; 
 
@@ -9,6 +10,7 @@ const int seed = 12345;
 const int boardSize = 10;
 const int initialInfectedStudents = 25;
 const int iterations = 5;
+
 
 void print2DVector(vector<vector<int>> input){
 	for (int i = 0; i < input.size(); ++i){
@@ -31,6 +33,8 @@ vector<vector<int>> construct2DVector(int size, int initialValue){
 	return result;
 }
 
+
+// generates a random number, inclusive.
 int generateRandomNumber(int from, int to){
 	return (rand()%to)+from;
 }
@@ -117,7 +121,8 @@ public:
 	}
 
 };
-	
+
+
 int main() {
 	srand(seed);
 
