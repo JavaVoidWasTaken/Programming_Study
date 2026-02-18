@@ -23,42 +23,102 @@ int generateRandomNumber(int from, int to){
 	return randomNumber;
 }
 
-// O(N), linear search. 
-int getBruteForceMinOfVector(vector<int> input){
-	int result = input[0];
-	int size = input.size();
-	for (int i = 0; i < size; ++i){
-		if (input[i] < result){
-			result = input[i];
-		}
-	}
-	return result;
-}
-
-// Returns the index(es) of the target in the vector.
-// Uses binary search (O(log(N)), and exponential search to find the lower/upper bounds of the items.
-vector<int> findItems(vector<int> input, int target){
+// Returns the index of the item.
+int binaryFindItem(vector<int> input, int target){
 	int size = input.size();
 	int left = 0;
 	int right = size-1;
-	vector<int> result;
-		
+	int middle = (right+left)/2;
+
 	while(left <= right){
-		int middle = (right+left)/2;
 		if (input[middle] == target){
-			result.push_back(middle);
-			input.erase(input.begin() + middle);
-			size--;
-			break;
+			return middle;
 		} else if (input[middle] < target){
 			left = middle+1;
 		} else if (input[middle] > target){
 			right = middle-1;
 		}
+		middle = (right+left)/2;
 	}
 	
-	return result;
+	// If no items are found, return negative.
+	return -1;
 }
+
+// Returns the upper bound index of the item.
+// Example: {1,2,3,3,3,4}, 3 -> 4 
+int getUpperBound(vector<int> input, int target){
+	int size = input.size();
+	int left = 0;
+	int right = size-1;
+	int middle = (right+left)/2;
+
+	while(left <= right){
+		// Bounds check.
+		if (middle == 0){
+			if (input[middle] == target){
+				return 0;
+			} else { 
+				return -1;
+			}
+		}
+
+		if ((input[middle-1] > input[middle]) && (input[middle] == target)){
+			return middle;
+		} else if (input[middle] < target){
+			left = middle+1;
+		} else if (input[middle] > target){
+			right = middle-1;
+		}
+		middle = (right+left)/2;
+		cout << "left is : " << left << endl;
+		cout << "middle is : " << middle << endl;
+		cout << "right is : " << right << endl;
+	}
+	
+	// If no items are found, return negative.
+	return -1;	
+}
+
+// Returns the lower bound index of the item.
+// Example: {1,2,3,3,3,4}, 3 -> 2
+int getLowerBound(vector<int> input, int target){
+	int size = input.size();
+	int left = 0;
+	int right = size-1;
+	int middle = (right+left)/2;
+
+	while(left <= right){
+		// Bounds check.
+		if (middle == size-1){
+			if (input[middle] == target){
+				return size-1;
+			} else { 
+				return -1;
+			}
+		}
+
+		if ((input[middle] < input[middle+1]) && (input[middle] == target)){
+			return middle;
+		} else if (input[middle] < target){
+			left = middle+1;
+		} else if (input[middle] > target){
+			right = middle-1;
+		}
+		middle = (right+left)/2;
+	}
+	
+	// If no items are found, return negative.
+	return -1;	
+}
+
+// Returns the index(es) of the target in the vector.
+// Uses binary search (O(log(N)), and exponential search to find the lower/upper bounds of the items.
+/*vector<int> findItems(vector<int> input, int target){
+	while (true){
+		
+	}
+}*/
 
 void printVector(vector<int> input, char separator){
 	int size = input.size();
@@ -68,7 +128,7 @@ void printVector(vector<int> input, char separator){
 	cout << endl;
 }
 
-void print(string input){
+void print(auto input){
 	cout << input;
 	cout << endl;
 }
@@ -97,8 +157,11 @@ int main() {
 	printVector(randomArray, ' ');
 	getUserInput("Search for what number?", targetNumber);
 	
-	vector<int> targetNumberIndexes;
-	print("The index of the number is:");
-	targetNumberIndexes = findItems(randomArray, targetNumber);
-	printVector(targetNumberIndexes, ' ');
+	int targetNumberIndex;
+	print("The upper bound index of the number is:");
+	print(getUpperBound(randomArray, targetNumber));
+	
+	print("The lower bound index of the number is:");
+	print(getLowerBound(randomArray, targetNumber));
+	
 }
