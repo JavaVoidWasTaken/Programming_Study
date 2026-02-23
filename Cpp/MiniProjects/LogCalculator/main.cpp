@@ -12,14 +12,7 @@ void printnl(auto input) {
 	cout << "\n> ";
 }
 
-double truncate (double input, double precision) {
-	double result;
-	result = input*pow(10, precision);
-	result = trunc(result);
-	result = result/pow(10, precision);
-	return result;
-}
-
+// Uses a naive approach, increments each time by 1, and halve each time it "fails".
 double getLog(double input, long long precision, double base) {
 	double exponent = 1;
 	double increment = 1;
@@ -29,9 +22,16 @@ double getLog(double input, long long precision, double base) {
 	}
 	
 	while (true) {
-		if (truncate(pow(base, exponent), precision) == truncate(input, precision)) {
+		double roughResult = pow(base, exponent);
+		double roughExpectedResult = input;
+		double delta = roughResult/roughExpectedResult;
+		double tolerance = pow(10, -1*precision);
+
+		if ((delta < (1+tolerance)) && 
+		    (delta > (1-tolerance))) {
 			return exponent;
 		}
+
 		if (pow(base, exponent) < input) {
 			exponent += increment;
 			if (pow(base, exponent) > input) {
@@ -54,8 +54,17 @@ int main() {
 
 	printnl("How many inputs?");
 	getInput(inputSize);
-	printnl("How many decimal places do you want it to be accurate to? (Note: due to floating point limitations, it can only be as precise as >=5 decimal points..)"); 
-	getInput(precision);
+	// Makes sure the precision value is less than 5.
+	while (true) {
+		printnl("How many front digit places do you want it to be accurate to? (Note: due to floating point limitations, it can only be as precise as >=5 digit points..)"); 
+		getInput(precision);
+		if (precision > 5){
+			cout << "You cant pick a value larger than 5!";
+			cout << endl;
+		} else {
+			break;
+		}
+	}
 	printnl("What base do you want to use?");
 	getInput(base);
 
