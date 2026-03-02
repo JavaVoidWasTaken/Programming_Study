@@ -36,13 +36,12 @@ enum guess tester (ll guess, ll target) {
 }
 
 void bot (ll target) {
-	ll exponent = 1;
 	enum guess guessResult;	
-	
 	ll iterations = 0;
 	ll low = 0;
 	ll middle = 0;
 	ll high = 1;
+
 	while (low <= high) {
 		++iterations;
 		middle = low + (high - low) / 2;
