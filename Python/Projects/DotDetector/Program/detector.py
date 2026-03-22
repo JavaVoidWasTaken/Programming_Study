@@ -2,24 +2,24 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 
-# other path for my webcam: path = "/dev/v4l/by-id/usb-046d_HD_Webcam_C525_C0C86EA0-video-index0"
-path = "/home/java/Videos/Competition Videos/Dot Detector Data/New/Clip 6.mp4"
+# Default camera path: path = 0
+path = 0;
 capture = cv.VideoCapture(path)
 
 # threshold1s for binary thresholding
 max_thresh = 255
-thresh = 75
+thresh = 60
 
 # dilation and erosion strength
-erosion_strength = 5
+erosion_strength = 6
 dilation_strength = 5
 
 # iterations of dilating and erosion to reduce noise
 iterations = 3
 
 # lower and upper bounds for dot detection
-s1 = 300
-s2 = 3000
+s1 = 100
+s2 = 1500 
 
 # display scaling factor
 scaling_factor = 1
@@ -79,7 +79,7 @@ while True:
         with open("output.txt", "a") as output:
             currentFrame = currentFrame + 1
             # output.write(str(currentFrame) + " "  + str(len(dots)) + "\n")
-            output.write(str(len(dots)) + "\n")
+            output.write(str(currentFrame) + ' ' + str(len(dots)) + "\n")
 
         # draws green lines on contours, blue borders on dots
         cv.drawContours(Display, cnts, -1, (0, 255, 0), 3)

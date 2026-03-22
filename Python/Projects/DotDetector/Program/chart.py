@@ -7,7 +7,7 @@ f = open('output.txt','r')
 for row in f:
     row = row.split(' ')
     names.append(row[0])
-    marks.append(int(row[1]))
+    marks.append((row[1]))
 
 plt.bar(names, marks, color = 'g', label = 'File Data')
 

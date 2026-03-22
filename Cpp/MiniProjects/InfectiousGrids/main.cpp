@@ -4,12 +4,12 @@ using namespace std;
 
 
 // Change this seed if you want different simulations.
-const int seed = 12345; 
+const int seed = 22345; 
 
 // Modify these parameters if you want to change the behaviour of the simulation.
-const int boardSize = 10;
-const int initialInfectedStudents = 25;
-const int iterations = 5;
+const int boardSize = 30;
+const int initialInfectedStudents = 100;
+const int iterations = 50;
 
 
 void print2DVector(vector<vector<int>> input){

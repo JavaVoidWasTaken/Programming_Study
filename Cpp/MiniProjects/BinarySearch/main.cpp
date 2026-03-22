@@ -2,19 +2,21 @@
 #include <vector>
 #include <algorithm>
 #include <utility>
+#include <chrono>
+#include <thread>
 using namespace std;
 
 // Inclusive number generator,
 // EXAMPLE: from=0, to=3 -> values of 0 until 3.
-int generateRandomNumber(int from, int to){
+int generateRandomNumber(int from, int to) {
 	int difference = from-to;
 	int randomNumber = from;
 	// Makes sure cases of modulus of 0 are handled properly. Added/Subtracted by 1 to be inclusive.
-	if (difference < 0){
+	if (difference < 0) {
 		randomNumber = rand()%(difference*-1+1);
 		return from+randomNumber;
 	}
-	if (difference > 0){
+	if (difference > 0) {
 		randomNumber = rand()%(difference+1);
 		return from-randomNumber;
 	}
@@ -24,18 +26,18 @@ int generateRandomNumber(int from, int to){
 }
 
 // Returns the index of the item.
-int binaryFindItem(vector<int> input, int target){
+int binaryFindItem(vector<int> input, int target) {
 	int size = input.size();
 	int left = 0;
 	int right = size-1;
 	int middle = (right+left)/2;
 
-	while(left <= right){
-		if (input[middle] == target){
+	while(left <= right) {
+		if (input[middle] == target) {
 			return middle;
-		} else if (input[middle] < target){
+		} else if (input[middle] < target) {
 			left = middle+1;
-		} else if (input[middle] > target){
+		} else if (input[middle] > target) {
 			right = middle-1;
 		}
 		middle = (right+left)/2;
@@ -46,79 +48,31 @@ int binaryFindItem(vector<int> input, int target){
 }
 
 // Returns the upper bound index of the item.
+// Uses a sorted vector, returns -1 if no items are found.
 // Example: {1,2,3,3,3,4}, 3 -> 4 
-int getUpperBound(vector<int> input, int target){
-	int size = input.size();
-	int left = 0;
-	int right = size-1;
-	int middle = (right+left)/2;
-
-	while(left <= right){
-		// Bounds check.
-		if (middle == 0){
-			if (input[middle] == target){
-				return 0;
-			} else { 
-				return -1;
-			}
-		}
-
-		if ((input[middle-1] > input[middle]) && (input[middle] == target)){
-			return middle;
-		} else if (input[middle] < target){
-			left = middle+1;
-		} else if (input[middle] > target){
-			right = middle-1;
-		}
-		middle = (right+left)/2;
-		cout << "left is : " << left << endl;
-		cout << "middle is : " << middle << endl;
-		cout << "right is : " << right << endl;
-	}
+int getUpperBound(vector<int> input, int target) {
+	int startingIndex = binaryFindItem(input, target);
 	
-	// If no items are found, return negative.
-	return -1;	
+	if (startingIndex == -1) {
+		return -1;
+	}
+  
+	// Starts searching for the upper bound.
+  int size = input.size();
+  int left = startingIndex;
+  int right = size-1;
+  int middle = (right+left)/2;
+	while (true) {
+    
+  }_	
+
 }
 
 // Returns the lower bound index of the item.
 // Example: {1,2,3,3,3,4}, 3 -> 2
 int getLowerBound(vector<int> input, int target){
-	int size = input.size();
-	int left = 0;
-	int right = size-1;
-	int middle = (right+left)/2;
 
-	while(left <= right){
-		// Bounds check.
-		if (middle == size-1){
-			if (input[middle] == target){
-				return size-1;
-			} else { 
-				return -1;
-			}
-		}
-
-		if ((input[middle] < input[middle+1]) && (input[middle] == target)){
-			return middle;
-		} else if (input[middle] < target){
-			left = middle+1;
-		} else if (input[middle] > target){
-			right = middle-1;
-		}
-		middle = (right+left)/2;
-	}
-	
-	// If no items are found, return negative.
-	return -1;	
 }
-
-// Returns the index(es) of the target in the vector.
-// Uses binary search (O(log(N)), and exponential search to find the lower/upper bounds of the items.
-/*vector<int> findItems(vector<int> input, int target){
-	while (true){
-		
-	}
-}*/
 
 void printVector(vector<int> input, char separator){
 	int size = input.size();
