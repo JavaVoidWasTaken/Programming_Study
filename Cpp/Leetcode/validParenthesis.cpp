@@ -1,3 +1,4 @@
+// Note: I did not know how to solve this, so I did take the answer from leetcode.
 class Solution {
 public:
     bool isValid(string s) {
