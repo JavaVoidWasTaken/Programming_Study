@@ -55,13 +55,15 @@ public:
 };
 
 int main(){
-	int width = 10;
-	int length = 10;
-	char defaultValue = '-';
+	int width, length, size, centerX, centerY;
+  char splashChar, emptyChar;
+  
+  cin >> width >> length >> size >> centerX >> centerY;
+  cin >> splashChar >> emptyChar;
 
-	splashGrid currentGrid(width, length, defaultValue);
+	splashGrid currentGrid(width, length, emptyChar);
 	
-	currentGrid.applySplash(2, 5, 5, 'X');	
+	currentGrid.applySplash(size, centerX, centerY, splashChar);	
 
 	print2DVector(currentGrid.grid, ' ', '\n');
 	cout << '\n';
