@@ -1,0 +1,5 @@
+triangle sum = (n(n-1))/2
+
+permutation = n!/(n-k)!
+
+combination = damn i forgot
