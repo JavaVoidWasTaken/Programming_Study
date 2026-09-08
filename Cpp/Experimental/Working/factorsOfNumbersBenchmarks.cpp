@@ -21,7 +21,8 @@ int main() {
             for (int64_t j = i; j < size; j += i) {
                 sieve[j] = false;
             }
-            cout << "Prime: " << i << ", time to calculate:" << duration_cast<nanoseconds>(high_resolution_clock::now()- prevTime).count() << "ns \n";
+            // cout << "Prime: " << i << ", time to calculate:" << duration_cast<nanoseconds>(high_resolution_clock::now()- prevTime).count() << "ns \n";
+            cout << duration_cast<nanoseconds>(high_resolution_clock::now()- prevTime).count() << "\n";
             prevTime = high_resolution_clock::now();
         }
     }

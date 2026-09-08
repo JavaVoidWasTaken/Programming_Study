@@ -52,9 +52,6 @@ public:
 
 };
 
-double degrees(vector v1) { return atan2(v1.x, v1.y)*180/pi; }
-double magnitude(vector v1) { return sqrt((v1.x*v1.x)+(v1.y*v1.y)); };
-
 ostream& operator<<(ostream& out, const vector a) {
     out << a.x << ' ' << a.y;
     return out;

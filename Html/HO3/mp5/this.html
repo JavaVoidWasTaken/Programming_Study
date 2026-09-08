@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head></head>
+	<body>
+    <h1><i>C++ QUIZ TIME!</i></h1>
+    <p><i>You must reach a minimum of 70 points to pass the quiz, good luck!</i></p>
+    <form method="POST" action="output.php">
+      <label>Is C++ a statically typed language? (5 points)<br></label>
+      <input type="radio" name="q1" value="yes">Yes
+      <input type="radio" name="q1" value="no">No
+      <br><br>
+      <label>Are semicolons mandatory in C++? (10 OR 5 points)<br></label>
+      <input type="radio" name="q2" value="yes">Yes
+      <input type="radio" name="q2" value="no">No
+      <input type="radio" name="q2" value="depends">Depends
+      <br><br>
+      <label>What happens if an integer is divided by zero? (15 points)<br></label>
+      <input type="radio" name="q3" value="nan">NaN
+      <input type="radio" name="q3" value="infinity">Infinity
+      <input type="radio" name="q3" value="ub">Undefined Behaviour
+      <br><br>
+      <label>What happens if you pass zero into a conditional? (20 points)<br></label>
+      <input type="radio" name="q4" value="pass">It will pass.
+      <input type="radio" name="q4" value="fail">it will fail.
+      <input type="radio" name="q4" value="ub">It will have undefined behaviuour.
+      <br><br>
+      <label>What STL provides fixed width integers? (25 points)<br></label>
+      <input type="radio" name="q5" value="stdint">stdint.h
+      <input type="radio" name="q5" value="integers">integers
+      <input type="radio" name="q5" value="cmath">cmath
+      <br><br>
+      <label>What unit does the cmath STL return when sin() is called? (25 points)<br></label>
+      <input type="radio" name="q6" value="pi">Pi(es)
+      <input type="radio" name="q6" value="radians">Radians
+      <input type="radio" name="q6" value="degrees">Degrees
+      <br><br>
+      <input type="submit" name="send" value="SEND">
+    </form>
+	</body>
+</html>
